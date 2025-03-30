@@ -1,1 +1,79 @@
-<h1> Hello! </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencil Sketch Program</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pencil Sketch Program Using OpenCV</h1>
+    <p>This program takes an image and converts it into a pencil sketch using OpenCV and Python. The process involves loading the image, converting it to grayscale, inverting the colors, blurring the image, and finally creating the pencil sketch effect.</p>
+
+    <h2>Steps Involved:</h2>
+    <ol>
+        <li><strong>Loading the image:</strong> The image is loaded from a specified path.</li>
+        <li><strong>Converting to grayscale:</strong> The loaded image is converted to a grayscale image.</li>
+        <li><strong>Inverting the grayscale image:</strong> The grayscale image colors are inverted.</li>
+        <li><strong>Blurring the inverted image:</strong> The inverted image is blurred using Gaussian blur.</li>
+        <li><strong>Creating the pencil sketch:</strong> The pencil sketch is created by dividing the grayscale image by the blurred inverted image.</li>
+        <li><strong>Displaying the images:</strong> The original image and the pencil sketch are displayed in separate windows.</li>
+        <li><strong>Saving the result:</strong> The pencil sketch is saved as a PNG file.</li>
+    </ol>
+
+    <h2>Python Code:</h2>
+    <pre><code>
+import pandas as pd
+import cv2
+import numpy as np
+
+# Step 1: Loading the image
+image_path = 'C:\\Users\\Lakshmi Praneetha\\OneDrive\\Pictures\\Screenshots\\Bangtan\\Wallpapers\\Screenshot (2).png'  # Replace with your image path
+image = cv2.imread(image_path)
+
+# Step 2: Converting to grayscale
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Step 3: Inverting the grayscale image
+inverted_image = cv2.bitwise_not(gray_image)
+
+# Step 4: Blurring the inverted image
+blurred_image = cv2.GaussianBlur(inverted_image, (21, 21), sigmaX=0, sigmaY=0)
+
+# Step 5: Creating the pencil sketch
+pencil_sketch = cv2.divide(gray_image, 255 - blurred_image, scale=256)
+
+# Step 6: Displaying the images
+cv2.imshow('Original Image', image)
+cv2.imshow('Pencil Sketch', pencil_sketch)
+
+# Step 7: Saving the result
+cv2.imwrite('pencil_sketch.png', pencil_sketch)
+
+# Wait for a key press and close the image windows
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+    </code></pre>
+
+</body>
+</html>
